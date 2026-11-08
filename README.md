@@ -18,3 +18,8 @@ The workflow follows three basic steps: Write a Dockerfiler, Build the Image,Run
 
 docker build -t cloud-service-demo:1.0 .
 docker run -d --name cloud-demo-container -p 8080:80 cloud-service-demo:1.0
+
+
+ Pod vs Deployment: A Pod is the smallest unit and runs one or more containers. A Deployment manages Pods and keeps the requested number of them running.
+ Service: Gives a stable address that routes traffic to a group of Pods, even as Pods are replaced.
+ Why more than one Pod: Handles more traffic and keeps the app available if one Pod fails.
