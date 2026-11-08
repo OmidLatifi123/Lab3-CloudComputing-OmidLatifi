@@ -19,7 +19,25 @@ The workflow follows three basic steps: Write a Dockerfiler, Build the Image,Run
 docker build -t cloud-service-demo:1.0 .
 docker run -d --name cloud-demo-container -p 8080:80 cloud-service-demo:1.0
 
+Assignment #3:
 
- Pod vs Deployment: A Pod is the smallest unit and runs one or more containers. A Deployment manages Pods and keeps the requested number of them running.
- Service: Gives a stable address that routes traffic to a group of Pods, even as Pods are replaced.
- Why more than one Pod: Handles more traffic and keeps the app available if one Pod fails.
+Kubernetes is a container orchestration platform. It deploys containers, keeps the requested number running, and gives them a stable way to be accessed.
+
+Pod: the smallest unit; runs one or more containers.
+Deployment: manages Pods and keeps the requested number running.
+Service: a stable address that routes traffic to a group of Pods.
+
+Start Minikube and load the Docker image:
+minikube start --driver=docker
+minikube image load cloud-service-demo:1.0
+
+Apply the Deployment and Service:
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+
+Access the app (then open http://localhost:8080):
+kubectl port-forward service/cloud-service-demo 8080:80
+
+Pod vs Deployment: A Pod is the smallest unit and runs one or more containers. A Deployment manages Pods and keeps the requested number of them running.
+Service: Gives a stable address that routes traffic to a group of Pods, even as Pods are replaced.
+Why more than one Pod: Handles more traffic and keeps the app available if one Pod fails.
